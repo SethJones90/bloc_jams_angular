@@ -35,12 +35,22 @@
 
         /**
         * @function playSong
-        * @desc plays the current Buzz object, seths the playing property of the song object to true
+        * @desc plays the current Buzz object, sets the playing property of the song object to true
         * @param {Object} song
         */
         var playSong = function(song) {
                 currentBuzzObject.play();
                 song.playing = true;
+        };
+
+        /**
+        * @function playSong
+        * @desc stops the current Buzz object, sets the playing property of the song object to null
+        * @param {Object} song
+        */
+        var stopSong = function(song) {
+                currentBuzzObject.stop();
+                song.playing = null;
         };
 
         /**
@@ -93,6 +103,20 @@
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex--;
             if (currentSongIndex < 0) {
+                currentBuzzObject.stop();
+                SongPlayer.currentSong.playing = null;
+            } else {
+                var song = currentAlbum.songs[currentSongIndex];
+                setSong(song);
+                playSong(song);
+            }
+
+        };
+
+        SongPlayer.next = function() {
+            var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+            currentSongIndex++;
+            if (currentSongIndex > currentSongIndex.length) {
                 currentBuzzObject.stop();
                 SongPlayer.currentSong.playing = null;
             } else {
