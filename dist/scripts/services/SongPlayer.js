@@ -80,8 +80,8 @@
             song = song || SongPlayer.currentSong;
             if (SongPlayer.currentSong !== song) {
                 setSong(song);
-                playSong(song);
             }
+            playSong(song);
         };
 
         /**
@@ -116,7 +116,7 @@
         SongPlayer.next = function() {
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex++;
-            if (currentSongIndex > currentSongIndex.length) {
+            if (currentSongIndex === currentAlbum.songs.length) {
                 currentBuzzObject.stop();
                 SongPlayer.currentSong.playing = null;
             } else {
