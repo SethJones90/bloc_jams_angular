@@ -32,6 +32,7 @@
             currentBuzzObject.bind('timeupdate', function() {
                 $rootScope.$apply(function() {
                     SongPlayer.currentTime = currentBuzzObject.getTime();
+                    SongPlayer.volume = currentBuzzObject.getVolume();
                 });
             });
 
@@ -79,6 +80,10 @@
         * @type {Number}
         */
         SongPlayer.currentTime = null;
+
+        SongPlayer.volume  = 0;
+
+        SongPlayer.maxVolume  = 100;
 
 
 
@@ -150,6 +155,13 @@
         SongPlayer.setCurrentTime = function(time) {
             if (currentBuzzObject) {
                 currentBuzzObject.setTime(time);
+            }
+        };
+
+
+        SongPlayer.setVolume = function(volume){
+            if(currentBuzzObject){
+                currentBuzzObject.setVolume(volume);
             }
         };
 
